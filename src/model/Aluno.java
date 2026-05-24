@@ -1,0 +1,304 @@
+package model;
+
+//para fazer que o atributo data de nascimento seja feito corretamente
+import java.sql.Date;
+
+public class Aluno {
+	private int id;
+    private String nome;
+	private String nome_social; //
+    private String cpf;
+    private String genero;
+    private boolean afrodescendente;
+    private boolean escolaridade_publica;
+    private Date data_nascimento;
+    private String local_nascimento; //
+    private String nacionalidade;
+    private String pais_origem;
+    private String filiacao_1;
+    private String filiacao_2;
+    private String responsavel_legal;
+    private String grau_parentesco;
+    private String habilitacao;
+    private String serie;
+    private String periodo;
+    private String rua;
+    private String bairro;
+    private String cidade;
+    private String CEP;
+    private String telefone;
+    private String email;
+    
+    
+
+    public Aluno() {
+    }
+
+    public Aluno(String nome, String cpf, String genero, boolean afrodescendente, boolean escolaridade_publica, Date data_nascimento, String nacionalidade, String pais_origem, String filiacao_1, String filiacao_2, String responsavel_legal, String grau_parentesco, String habilitacao, String serie, String periodo, String rua, String bairro, String cidade, String CEP, String telefone, String email ) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.genero = genero;
+        this.afrodescendente = afrodescendente;
+        this.escolaridade_publica = escolaridade_publica;
+        this.data_nascimento = data_nascimento;
+        this.nacionalidade = nacionalidade;
+        this.pais_origem = pais_origem;
+        this.filiacao_1 = filiacao_1;
+        this.filiacao_2 = filiacao_2;
+        this.responsavel_legal = responsavel_legal;
+        this.grau_parentesco = grau_parentesco;
+        this.habilitacao = habilitacao;
+        this.serie = serie;
+        this.periodo = periodo;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.CEP = CEP;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public Aluno(int id, String nome, String nome_social, String cpf, String genero, boolean afrodescendente, boolean escolaridade_publica, Date data_nascimento, String local_nascimento, String nacionalidade, String pais_origem, String filiacao_1, String filiacao_2, String responsavel_legal, String grau_parentesco, String habilitacao, String serie, String periodo, String rua, String bairro, String cidade, String CEP, String telefone, String email ) {
+        this.id = id;
+        this.nome = nome;
+        this.nome_social = nome_social;
+        this.cpf = cpf;
+        this.genero = genero;
+        this.afrodescendente = afrodescendente;
+        this.escolaridade_publica = escolaridade_publica;
+        this.data_nascimento = data_nascimento;
+        this.local_nascimento = local_nascimento;
+        this.nacionalidade = nacionalidade;
+        this.pais_origem = pais_origem;
+        this.filiacao_1 = filiacao_1;
+        this.filiacao_2 = filiacao_2;
+        this.responsavel_legal = responsavel_legal;
+        this.grau_parentesco = grau_parentesco;
+        this.habilitacao = habilitacao;
+        this.serie = serie;
+        this.periodo = periodo;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.CEP = CEP;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public Aluno(int id, String nome, String cpf, String genero, boolean afrodescendente, boolean escolaridade_publica, Date data_nascimento, String nacionalidade, String pais_origem, String filiacao_1, String filiacao_2, String responsavel_legal, String grau_parentesco, String habilitacao, String serie, String periodo, String rua, String bairro, String cidade, String CEP, String telefone, String email ) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.genero = genero;
+        this.afrodescendente = afrodescendente;
+        this.escolaridade_publica = escolaridade_publica;
+        this.data_nascimento = data_nascimento;
+        this.nacionalidade = nacionalidade;
+        this.pais_origem = pais_origem;
+        this.filiacao_1 = filiacao_1;
+        this.filiacao_2 = filiacao_2;
+        this.responsavel_legal = responsavel_legal;
+        this.grau_parentesco = grau_parentesco;
+        this.habilitacao = habilitacao;
+        this.serie = serie;
+        this.periodo = periodo;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.CEP = CEP;
+        this.telefone = telefone;
+        this.email = email;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome_social() {
+		return nome_social;
+	}
+
+	public void setNome_social(String nome_social) {
+		this.nome_social = nome_social;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public boolean isAfrodescendente() {
+		return afrodescendente;
+	}
+
+	public void setAfrodescendente(boolean afrodescendente) {
+		this.afrodescendente = afrodescendente;
+	}
+
+	public boolean isEscolaridade_publica() {
+		return escolaridade_publica;
+	}
+
+	public void setEscolaridade_publica(boolean escolaridade_publica) {
+		this.escolaridade_publica = escolaridade_publica;
+	}
+
+	public Date getData_nascimento() {
+		return data_nascimento;
+	}
+
+	public void setData_nascimento(Date data_nascimento) {
+		this.data_nascimento = data_nascimento;
+	}
+
+	public String getLocal_nascimento() {
+		return local_nascimento;
+	}
+
+	public void setLocal_nascimento(String local_nascimento) {
+		this.local_nascimento = local_nascimento;
+	}
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+	public String getPais_origem() {
+		return pais_origem;
+	}
+
+	public void setPais_origem(String pais_origem) {
+		this.pais_origem = pais_origem;
+	}
+
+	public String getFiliacao_1() {
+		return filiacao_1;
+	}
+
+	public void setFiliacao_1(String filiacao_1) {
+		this.filiacao_1 = filiacao_1;
+	}
+
+	public String getFiliacao_2() {
+		return filiacao_2;
+	}
+
+	public void setFiliacao_2(String filiacao_2) {
+		this.filiacao_2 = filiacao_2;
+	}
+
+	public String getResponsavel_legal() {
+		return responsavel_legal;
+	}
+
+	public void setResponsavel_legal(String responsavel_legal) {
+		this.responsavel_legal = responsavel_legal;
+	}
+
+	public String getGrau_parentesco() {
+		return grau_parentesco;
+	}
+
+	public void setGrau_parentesco(String grau_parentesco) {
+		this.grau_parentesco = grau_parentesco;
+	}
+
+	public String getHabilitacao() {
+		return habilitacao;
+	}
+
+	public void setHabilitacao(String habilitacao) {
+		this.habilitacao = habilitacao;
+	}
+
+	public String getSerie() {
+		return serie;
+	}
+
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getCEP() {
+		return CEP;
+	}
+
+	public void setCEP(String cEP) {
+		CEP = cEP;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
