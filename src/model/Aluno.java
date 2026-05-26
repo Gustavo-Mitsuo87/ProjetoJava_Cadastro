@@ -23,6 +23,9 @@ public class Aluno {
     private String serie;
     private String periodo;
     private String rua;
+    private String complemento;
+    private String apto;
+    private String bloco;
     private String bairro;
     private String cidade;
     private String CEP;
@@ -58,7 +61,7 @@ public class Aluno {
         this.email = email;
     }
 
-    public Aluno(int id, String nome, String nome_social, String cpf, String genero, boolean afrodescendente, boolean escolaridade_publica, Date data_nascimento, String local_nascimento, String nacionalidade, String pais_origem, String filiacao_1, String filiacao_2, String responsavel_legal, String grau_parentesco, String habilitacao, String serie, String periodo, String rua, String bairro, String cidade, String CEP, String telefone, String email ) {
+    public Aluno(int id, String nome, String nome_social, String cpf, String genero, boolean afrodescendente, boolean escolaridade_publica, Date data_nascimento, String local_nascimento, String nacionalidade, String pais_origem, String filiacao_1, String filiacao_2, String responsavel_legal, String grau_parentesco, String habilitacao, String serie, String periodo, String rua, String complemento, String apto, String bloco, String bairro, String cidade, String CEP, String telefone, String email ) {
         this.id = id;
         this.nome = nome;
         this.nome_social = nome_social;
@@ -78,6 +81,9 @@ public class Aluno {
         this.serie = serie;
         this.periodo = periodo;
         this.rua = rua;
+        this.complemento = complemento;
+        this.apto = apto;
+        this.bloco = bloco;
         this.bairro = bairro;
         this.cidade = cidade;
         this.CEP = CEP;
@@ -114,7 +120,31 @@ public class Aluno {
         return id;
     }
 
-    public void setId(int id) {
+    public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getApto() {
+		return apto;
+	}
+
+	public void setApto(String apto) {
+		this.apto = apto;
+	}
+
+	public String getBloco() {
+		return bloco;
+	}
+
+	public void setBloco(String bloco) {
+		this.bloco = bloco;
+	}
+
+	public void setId(int id) {
         this.id = id;
     }
 

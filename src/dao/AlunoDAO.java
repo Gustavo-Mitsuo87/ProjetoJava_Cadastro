@@ -16,7 +16,7 @@ public class AlunoDAO {
 		Connection conn = null;
 		PreparedStatement comando = null;
 		
-		String sql = "INSERT INTO aluno (nome, nome_social, cpf, genero, afrodescendente, escolaridade_publica, data_nascimento, local_nascimento, nacionalidade, pais_origem, filiacao_1, filiacao_2, responsavel_legal, grau_parentesco, habilitacao, serie, periodo, rua, bairro, cidade, CEP, telefone, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO aluno (nome, nome_social, cpf, genero, afrodescendente, escolaridade_publica, data_nascimento, local_nascimento, nacionalidade, pais_origem, filiacao_1, filiacao_2, responsavel_legal, grau_parentesco, habilitacao, serie, periodo, rua, complemento, apto, bloco, bairro, cidade, CEP, telefone, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?)";
 		//Local de Nascimento e Nome Social são opcionais
 		try {
 			conn = Conexao.conectar();
@@ -48,11 +48,14 @@ public class AlunoDAO {
 			comando.setString(16, aluno.getSerie());
 			comando.setString(17, aluno.getPeriodo());
 			comando.setString(18, aluno.getRua());
-			comando.setString(19, aluno.getBairro());
-			comando.setString(20, aluno.getCidade());
-			comando.setString(21, aluno.getCEP());
-			comando.setString(22, aluno.getTelefone());
-			comando.setString(23, aluno.getEmail());
+			comando.setString(19, aluno.getComplemento());
+			comando.setString(20, aluno.getApto());
+			comando.setString(21, aluno.getBloco());
+			comando.setString(22, aluno.getBairro());
+			comando.setString(23, aluno.getCidade());
+			comando.setString(24, aluno.getCEP());
+			comando.setString(24, aluno.getTelefone());
+			comando.setString(26, aluno.getEmail());
 			comando.executeUpdate();
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao salvar no Banco de Dados: " + e.getMessage());
@@ -74,7 +77,7 @@ public class AlunoDAO {
 		Connection conn = null;
 		PreparedStatement comando = null;
 		
-		String sql = "UPDATE aluno SET nome = ?, nome_social = ?, cpf = ?, genero = ?, afrodescendente = ?, escolaridade_publica = ?, data_nascimento = ?, local_nascimento = ?, nacionalidade = ?, pais_origem = ?, filiacao_1 = ?, filiacao_2 = ?, responsavel_legal = ?, grau_parentesco = ?, habilitacao = ?, serie = ?, periodo = ?, rua = ?, bairro = ?, cidade = ?, CEP = ?, telefone = ?, email = ? WHERE id = ?";
+		String sql = "UPDATE aluno SET nome = ?, nome_social = ?, cpf = ?, genero = ?, afrodescendente = ?, escolaridade_publica = ?, data_nascimento = ?, local_nascimento = ?, nacionalidade = ?, pais_origem = ?, filiacao_1 = ?, filiacao_2 = ?, responsavel_legal = ?, grau_parentesco = ?, habilitacao = ?, serie = ?, periodo = ?, rua = ?, complemento = ?, apto = ?, bloco = ?, bairro = ?, cidade = ?, CEP = ?, telefone = ?, email = ? WHERE id = ?";
 
 		try {
 			conn = Conexao.conectar();
@@ -105,12 +108,15 @@ public class AlunoDAO {
 			comando.setString(16, aluno.getSerie());
 			comando.setString(17, aluno.getPeriodo());
 			comando.setString(18, aluno.getRua());
-			comando.setString(19, aluno.getBairro());
-			comando.setString(20, aluno.getCidade());
-			comando.setString(21, aluno.getCEP());
-			comando.setString(22, aluno.getTelefone());
-			comando.setString(23, aluno.getEmail());
-			comando.setInt(24, aluno.getId());
+			comando.setString(19, aluno.getComplemento());
+			comando.setString(20, aluno.getApto());
+			comando.setString(21, aluno.getBloco());
+			comando.setString(22, aluno.getBairro());
+			comando.setString(23, aluno.getCidade());
+			comando.setString(24, aluno.getCEP());
+			comando.setString(25, aluno.getTelefone());
+			comando.setString(26, aluno.getEmail());
+			comando.setInt(27, aluno.getId());
 			comando.executeUpdate();
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao atualizar dados no Banco de Dados: " + e.getMessage());
@@ -140,7 +146,7 @@ public class AlunoDAO {
 			comando.setInt(1, id);
 			comando.executeUpdate();
 		} catch (Exception e) {
-            throw new RuntimeException("Erro ao excluir cliente: " + e.getMessage());
+            throw new RuntimeException("Erro ao excluir aluno: " + e.getMessage());
         } finally {
             try {
                 if (comando != null) {
@@ -191,6 +197,9 @@ public class AlunoDAO {
 				aluno.setSerie(rs.getString("serie"));
 				aluno.setPeriodo(rs.getString("periodo"));
 				aluno.setRua(rs.getString("rua"));
+				aluno.setComplemento(rs.getString("complemento"));
+				aluno.setApto(rs.getString("apto"));
+				aluno.setBloco(rs.getString("bloco"));
 				aluno.setBairro(rs.getString("bairro"));
 				aluno.setCidade(rs.getString("cidade"));
 				aluno.setCEP(rs.getString("CEP"));
