@@ -15,8 +15,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
 
-import controller.ClienteController;
+// import controller.Controllers;
 
 
 
@@ -55,16 +56,16 @@ public class TelaAluno extends JFrame {
     private JTextField txtNome;
     private JTextField txtNomeSocial;
     private JTextField txtCPF;
-    
-    
-    
+    private JComboBox<String> cbGenero;
+    private JComboBox<String> cbAfro;
+    private JComboBox<String> cbEscolaridade;
     private JTextField txtdtNascimento;
     private JTextField txtNacionalidade;
     private JTextField txtResponsavel;
     private JTextField txtGrauDeParentesco;
-    private JTextField txtHabilitacao;
-    private JTextField txtSerie;
-    private JTextField txtPeriodo;
+    private JComboBox<String> cbHabilitacao;
+    private JComboBox<String> cbSerie;
+    private JComboBox<String> cbPeriodo;
     
     private JTextField txtRua;
     private JTextField txtComplemento;
@@ -83,28 +84,28 @@ public class TelaAluno extends JFrame {
     private JButton btnExcluir;
     private JButton btnLimpar;
 
-    private JTable tabelaClientes;
+    private JTable tabelaAlunos;
     private DefaultTableModel modeloTabela;
     
-    private AlunoController controller;
+    // private Controllers controller;
 
     public TelaAluno() {
     	setTitle("Cadastro de Alunos");
-    	setSize(700,600);
+    	setSize(800,700);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         
         criarComponentes();
         
-        controller = new AlunoController(this);
+        /*controller = new Controllers(this);
         configurarEventos();
-        controller.carregarTabela;
+        controller.carregarTabela();*/
         
     }
     
     private void criarComponentes() {
-    	JPanel painelFormulario = new JPanel(new GridLayout(3, 2, 10, 10));
+    	JPanel painelFormulario = new JPanel(new GridLayout(0, 4, 20, 10));
     	painelFormulario.setBorder(BorderFactory.createTitledBorder("Dados Dos Alunos"));
     	
     	lblId = new JLabel("ID:");
@@ -121,13 +122,31 @@ public class TelaAluno extends JFrame {
         txtCPF = new JTextField();
         
         lblGenero = new JLabel("Genero:");
-        txtNome = new JTextField();
+        String[] opcoesGenero = {
+        	    "Selecione",
+        	    "Masculino",
+        	    "Feminino",
+        	    "Outro",
+        	    "Prefiro não informar"
+        	};
+        cbGenero = new JComboBox<>(opcoesGenero);
         
         lblAfrodescendencia = new JLabel("Afrodescendencia:");
-        txtNome = new JTextField();
+        String[] opcoesAfro = {
+        	    "Selecione",
+        	    "Sim",
+        	    "Não"
+    
+        	};
+        cbAfro = new JComboBox<>(opcoesAfro);
         
-        lblEscolaridade = new JLabel("Escolaridade:");
-        txtNome = new JTextField();
+        lblEscolaridade = new JLabel("Escolaridade pública:");
+        String[] opcoesEscolaridade = {
+        	    "Selecione",
+        	    "Sim",
+        	    "Não"
+        	};
+        cbEscolaridade = new JComboBox<>(opcoesEscolaridade);
         
         lbldtNascimento = new JLabel("Data de Nascimento:");
         txtdtNascimento = new JTextField();
@@ -142,13 +161,33 @@ public class TelaAluno extends JFrame {
         txtGrauDeParentesco = new JTextField();
         
         lblHabilitacao = new JLabel("Habilitação:");
-        txtHabilitacao = new JTextField();
+        String[] opcoesHabilitacao = {
+        	    "Selecione",
+        	    "Desenvolvimento De Sistemas",
+        	    "Administração",
+        	    "Logística"
+        	   
+        	};
+        cbHabilitacao = new JComboBox<>(opcoesHabilitacao);
         
         lblSerie = new JLabel("Serie:");
-        txtSerie = new JTextField();
+        String[] opcoesSerie = {
+        	    "Selecione",
+        	    "1° Ano",
+        	    "2° Ano",
+        	    "3° Ano"
+        	    
+        	};
+        cbSerie = new JComboBox<>(opcoesSerie);
         
         lblPeriodo = new JLabel("Periodo:");
-        txtPeriodo = new JTextField();
+        String[] opcoesPeriodo = {
+        	    "Selecione",
+        	    "Manhã",
+        	    "Tarde",
+        	    "Noite"
+        	};
+        cbPeriodo = new JComboBox<>(opcoesPeriodo);
         
         lblRua = new JLabel("Rua:");
         txtRua = new JTextField();
@@ -186,11 +225,11 @@ public class TelaAluno extends JFrame {
         painelFormulario.add(lblCPF);
         painelFormulario.add(txtCPF);
         painelFormulario.add(lblGenero);
-        painelFormulario.add(txtNome);
+        painelFormulario.add(cbGenero);
         painelFormulario.add(lblAfrodescendencia);
-        painelFormulario.add(txtEmail);
+        painelFormulario.add(cbAfro);
         painelFormulario.add(lblEscolaridade);
-        painelFormulario.add(txtId);
+        painelFormulario.add(cbEscolaridade);
         painelFormulario.add(lbldtNascimento);
         painelFormulario.add(txtdtNascimento);
         painelFormulario.add(lblNacionalidade);
@@ -201,11 +240,11 @@ public class TelaAluno extends JFrame {
         painelFormulario.add(txtGrauDeParentesco);
         
         painelFormulario.add(lblHabilitacao);
-        painelFormulario.add(txtHabilitacao);
+        painelFormulario.add(cbHabilitacao);
         painelFormulario.add(lblSerie);
-        painelFormulario.add(txtSerie);
+        painelFormulario.add(cbSerie);
         painelFormulario.add(lblPeriodo);
-        painelFormulario.add(txtPeriodo);
+        painelFormulario.add(cbPeriodo);
         
         painelFormulario.add(lblRua);
         painelFormulario.add(txtRua);
@@ -227,8 +266,172 @@ public class TelaAluno extends JFrame {
         painelFormulario.add(txtTel);
         painelFormulario.add(lblEmail);
         painelFormulario.add(txtEmail);
+        
+        add(painelFormulario, BorderLayout.NORTH);
+        
+        modeloTabela = new DefaultTableModel(new Object[] { 
+        		"ID", "Nome", "Nome Social","CPF","Genero","Afrodescendencia","Escolaridade",
+        		"Data de Nascimento","Nacionalidade","Responsavel","Grau de Parentesco", "Habilitação",
+        		"Série", "Período", "Rua", "Complemento", "Apto", "Bloco", "Bairro", "Cidade", "Cep",
+        		"Telefone", "E-mail"
+
+        }, 0) {
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+
+        tabelaAlunos = new JTable(modeloTabela);
+        tabelaAlunos.setRowHeight(25);
+        
+        tabelaAlunos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabelaAlunos.getTableHeader().setReorderingAllowed(false);
+        JScrollPane scrollPane = new JScrollPane(tabelaAlunos);
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Lista de Clientes"));
+        add(scrollPane, BorderLayout.CENTER);
+        
+        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+
+        btnNovo = new JButton("Novo");
+        btnSalvar = new JButton("Salvar");
+        btnExcluir = new JButton("Excluir");
+        btnLimpar = new JButton("Limpar");
+
+        painelBotoes.add(btnNovo);
+        painelBotoes.add(btnSalvar);
+        painelBotoes.add(btnExcluir);
+        painelBotoes.add(btnLimpar);
+
+        add(painelBotoes, BorderLayout.SOUTH);
+        
     }
     
+    /*private void configurarEventos() {
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                controller.limpar();
+            }
+        });
+
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                controller.salvar();
+            }
+        });
+
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                controller.excluir();
+            }
+        });
+
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                controller.limpar();
+            }
+        });
+
+        tabelaAlunos.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                controller.preencherFormulario();
+            }
+        });
+    }*/
+    
+    public JTextField getTxtId() {
+        return txtId;
+    }
+
+    public JTextField getTxtNome() {
+        return txtNome;
+    }
+
+    public JTextField getTxtNomeSocial() {
+        return txtNomeSocial;
+    }
+    
+    public JTextField getTxtCPF() {
+        return txtCPF;
+    }
+
+    public JComboBox<String> getCbGenero() {
+        return cbGenero;
+    }
+
+    public JComboBox<String> getCbAfro() {
+        return cbAfro;
+    }
+    
+    public JComboBox<String> getCbEscolaridade() {
+        return cbEscolaridade;
+    }
+
+    public JTextField getTxtdtNascimento() {
+        return txtdtNascimento;
+    }
+
+    public JTextField getTxtNacionalidade() {
+        return txtNacionalidade;
+    }
+    
+    public JTextField getTxtResponsavel() {
+        return txtResponsavel;
+    }
+
+    public JTextField getTxtGrauDeParentesco() {
+        return txtGrauDeParentesco;
+    }
+
+    public JComboBox<String> getCbHabilitacao() {
+        return cbHabilitacao;
+    }
+    
+    public JComboBox<String> getCbSerie() {
+        return cbSerie;
+    }
+
+    public JComboBox<String> getCbPeriodo() {
+        return cbPeriodo;
+    }
+
+    public JTextField getTxtRua() {
+        return txtRua;
+    }
+    
+    public JTextField getTxtComplemento() {
+        return txtComplemento;
+    }
+
+    public JTextField getTxtApto() {
+        return txtApto;
+    }
+
+    public JTextField getTxtBairro() {
+        return txtBairro;
+    }
+    
+    public JTextField getTxtCidade() {
+        return txtCidade;
+    }
+
+    public JTextField getTxtCEP() {
+        return txtCep;
+    }
+
+    public JTextField getTxtTel() {
+        return txtTel;
+    }
+    
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
+
+    public JTable getTabelaAlunos() {
+        return tabelaAlunos;
+    }
     
 
 
