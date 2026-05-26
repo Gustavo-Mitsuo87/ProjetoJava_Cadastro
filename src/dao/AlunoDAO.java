@@ -108,9 +108,21 @@ public class AlunoDAO {
 			comando.setString(16, aluno.getSerie());
 			comando.setString(17, aluno.getPeriodo());
 			comando.setString(18, aluno.getRua());
-			comando.setString(19, aluno.getComplemento());
-			comando.setString(20, aluno.getApto());
-			comando.setString(21, aluno.getBloco());
+			if (aluno.getComplemento() != null) {
+				comando.setString(19, aluno.getComplemento());
+			} else {
+				comando.setNull(19, java.sql.Types.VARCHAR);
+			}
+			if (aluno.getApto() != null) {
+				comando.setString(20, aluno.getApto());
+			} else {
+				comando.setNull(20, java.sql.Types.VARCHAR);
+			}
+			if (aluno.getBloco() != null) {
+				comando.setString(21, aluno.getBloco());
+			} else {
+				comando.setNull(21, java.sql.Types.VARCHAR);
+			}
 			comando.setString(22, aluno.getBairro());
 			comando.setString(23, aluno.getCidade());
 			comando.setString(24, aluno.getCEP());
