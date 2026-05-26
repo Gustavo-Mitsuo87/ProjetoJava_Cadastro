@@ -15,10 +15,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 import javax.swing.JComboBox;
 
-// import controller.Controllers;
-
+// import controller.AlunoConrtoller;
 
 
 public class TelaAluno extends JFrame {
@@ -48,9 +48,7 @@ public class TelaAluno extends JFrame {
     private JLabel lblCep;
     private JLabel lblTel;
     private JLabel lblEmail;
-    
-    
-   
+
 
     private JTextField txtId;
     private JTextField txtNome;
@@ -70,7 +68,7 @@ public class TelaAluno extends JFrame {
     private JTextField txtRua;
     private JTextField txtComplemento;
     private JTextField txtApto;
-    private JTextField txtAptoBloco;
+    private JTextField txtBloco;
     private JTextField txtBairro;
     private JTextField txtCidade;
     private JTextField txtCep;
@@ -78,7 +76,6 @@ public class TelaAluno extends JFrame {
     private JTextField txtEmail;
    
     
-
     private JButton btnNovo;
     private JButton btnSalvar;
     private JButton btnExcluir;
@@ -199,7 +196,7 @@ public class TelaAluno extends JFrame {
         txtApto = new JTextField();
         
         lblAptoBloco = new JLabel("Bloco:");
-        txtAptoBloco = new JTextField();
+        txtBloco = new JTextField();
         
         lblBairro = new JLabel("Bairro:");
         txtBairro = new JTextField();
@@ -254,7 +251,7 @@ public class TelaAluno extends JFrame {
         painelFormulario.add(txtApto);
         
         painelFormulario.add(lblAptoBloco);
-        painelFormulario.add(txtAptoBloco);
+        painelFormulario.add(txtBloco);
         painelFormulario.add(lblBairro);
         painelFormulario.add(txtBairro);
         painelFormulario.add(lblCidade);
@@ -432,8 +429,13 @@ public class TelaAluno extends JFrame {
     public JTable getTabelaAlunos() {
         return tabelaAlunos;
     }
+
+    public JTextComponent getTxtBloco() {
+       return txtBloco;
+    }
+
+    public JTextComponent getTxtCep() {
+        return txtCep;
+    }
     
-
-
-
 }
