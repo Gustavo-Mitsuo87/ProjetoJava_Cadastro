@@ -12,61 +12,68 @@ import util.Conexao;
 public class AlunoDAO {
 	
 	public void salvar(Aluno aluno) {
-		//O conn faz a conexão com o BD, e o comando prepara e manda o comando para o BD
 		Connection conn = null;
 		PreparedStatement comando = null;
 		
-		String sql = "INSERT INTO aluno (nome, nome_social, cpf, genero, afrodescendente, escolaridade_publica, data_nascimento, local_nascimento, nacionalidade, pais_origem, filiacao_1, filiacao_2, responsavel_legal, grau_parentesco, habilitacao, serie, periodo, rua, complemento, apto, bloco, bairro, cidade, CEP, telefone, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?)";
-		//Local de Nascimento e Nome Social são opcionais
+		// SQL Corrigido: Removidos campos inexistentes (local_nascimento, pais_origem, filiacoes)
+		String sql = "INSERT INTO aluno (nome, nome_social, cpf, genero, afrodescendente, escolaridade_publica, data_nascimento, nacionalidade, responsavel_legal, grau_parentesco, habilitacao, serie, periodo, rua, complemento, apto, bloco, bairro, cidade, CEP, telefone, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
 		try {
 			conn = Conexao.conectar();
 			comando = conn.prepareStatement(sql);
+			
 			comando.setString(1, aluno.getNome());
-			//Essa estrutura é porque o campo nome_social é opcional o preenchimento. Caso esteja preenchido irá pro BD, se n, irá como NULL
+			
 			if (aluno.getNome_social() != null) {
 				comando.setString(2, aluno.getNome_social());
 			} else {
 				comando.setNull(2, java.sql.Types.VARCHAR);
 			}
+			
 			comando.setString(3, aluno.getCpf());
 			comando.setString(4, aluno.getGenero());
 			comando.setBoolean(5, aluno.isAfrodescendente());
 			comando.setBoolean(6, aluno.isEscolaridade_publica());
 			comando.setDate(7, aluno.getData_nascimento());
-			if (aluno.getLocal_nascimento() != null) {
-				comando.setString(8, aluno.getLocal_nascimento());
+			comando.setString(8, aluno.getNacionalidade()); // Antes era o número 9 desalinhado
+			comando.setString(9, aluno.getResponsavel_legal());
+			comando.setString(10, aluno.getGrau_parentesco());
+			comando.setString(11, aluno.getHabilitacao());
+			comando.setString(12, aluno.getSerie());
+			comando.setString(13, aluno.getPeriodo());
+			comando.setString(14, aluno.getRua());
+			
+			if (aluno.getComplemento() != null) {
+				comando.setString(15, aluno.getComplemento());
 			} else {
-				comando.setNull(8, java.sql.Types.VARCHAR);
+				comando.setNull(15, java.sql.Types.VARCHAR);
 			}
-			comando.setString(9, aluno.getNacionalidade());
-			comando.setString(10, aluno.getPais_origem());
-			comando.setString(11, aluno.getFiliacao_1());
-			comando.setString(12, aluno.getFiliacao_2());
-			comando.setString(13, aluno.getResponsavel_legal());
-			comando.setString(14, aluno.getGrau_parentesco());
-			comando.setString(15, aluno.getHabilitacao());
-			comando.setString(16, aluno.getSerie());
-			comando.setString(17, aluno.getPeriodo());
-			comando.setString(18, aluno.getRua());
-			comando.setString(19, aluno.getComplemento());
-			comando.setString(20, aluno.getApto());
-			comando.setString(21, aluno.getBloco());
-			comando.setString(22, aluno.getBairro());
-			comando.setString(23, aluno.getCidade());
-			comando.setString(24, aluno.getCEP());
-			comando.setString(24, aluno.getTelefone());
-			comando.setString(26, aluno.getEmail());
+			
+			if (aluno.getApto() != null) {
+				comando.setString(16, aluno.getApto());
+			} else {
+				comando.setNull(16, java.sql.Types.VARCHAR);
+			}
+			
+			if (aluno.getBloco() != null) {
+				comando.setString(17, aluno.getBloco());
+			} else {
+				comando.setNull(17, java.sql.Types.VARCHAR);
+			}
+			
+			comando.setString(18, aluno.getBairro());
+			comando.setString(19, aluno.getCidade());
+			comando.setString(20, aluno.getCEP());
+			comando.setString(21, aluno.getTelefone()); // Corrigido número repetido
+			comando.setString(22, aluno.getEmail());
+			
 			comando.executeUpdate();
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao salvar no Banco de Dados: " + e.getMessage());
 		} finally {
 			try {
-				if (comando != null) {
-					comando.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
+				if (comando != null) comando.close();
+				if (conn != null) conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -77,69 +84,65 @@ public class AlunoDAO {
 		Connection conn = null;
 		PreparedStatement comando = null;
 		
-		String sql = "UPDATE aluno SET nome = ?, nome_social = ?, cpf = ?, genero = ?, afrodescendente = ?, escolaridade_publica = ?, data_nascimento = ?, local_nascimento = ?, nacionalidade = ?, pais_origem = ?, filiacao_1 = ?, filiacao_2 = ?, responsavel_legal = ?, grau_parentesco = ?, habilitacao = ?, serie = ?, periodo = ?, rua = ?, complemento = ?, apto = ?, bloco = ?, bairro = ?, cidade = ?, CEP = ?, telefone = ?, email = ? WHERE id = ?";
+		String sql = "UPDATE aluno SET nome = ?, nome_social = ?, cpf = ?, genero = ?, afrodescendente = ?, escolaridade_publica = ?, data_nascimento = ?, nacionalidade = ?, responsavel_legal = ?, grau_parentesco = ?, habilitacao = ?, serie = ?, periodo = ?, rua = ?, complemento = ?, apto = ?, bloco = ?, bairro = ?, cidade = ?, CEP = ?, telefone = ?, email = ? WHERE id = ?";
 
 		try {
 			conn = Conexao.conectar();
 			comando = conn.prepareStatement(sql);
+			
 			comando.setString(1, aluno.getNome());
+			//Essa estrutura é porque o campo nome_social é opcional o preenchimento. Caso esteja preenchido irá pro BD, se n, irá como NULL
 			if (aluno.getNome_social() != null) {
 				comando.setString(2, aluno.getNome_social());
 			} else {
 				comando.setNull(2, java.sql.Types.VARCHAR);
 			}
+			
 			comando.setString(3, aluno.getCpf());
 			comando.setString(4, aluno.getGenero());
 			comando.setBoolean(5, aluno.isAfrodescendente());
 			comando.setBoolean(6, aluno.isEscolaridade_publica());
 			comando.setDate(7, aluno.getData_nascimento());
-			if (aluno.getLocal_nascimento() != null) {
-				comando.setString(8, aluno.getLocal_nascimento());
-			} else {
-				comando.setNull(8, java.sql.Types.VARCHAR);
-			}
-			comando.setString(9, aluno.getNacionalidade());
-			comando.setString(10, aluno.getPais_origem());
-			comando.setString(11, aluno.getFiliacao_1());
-			comando.setString(12, aluno.getFiliacao_2());
-			comando.setString(13, aluno.getResponsavel_legal());
-			comando.setString(14, aluno.getGrau_parentesco());
-			comando.setString(15, aluno.getHabilitacao());
-			comando.setString(16, aluno.getSerie());
-			comando.setString(17, aluno.getPeriodo());
-			comando.setString(18, aluno.getRua());
+			comando.setString(8, aluno.getNacionalidade());
+			comando.setString(9, aluno.getResponsavel_legal());
+			comando.setString(10, aluno.getGrau_parentesco());
+			comando.setString(11, aluno.getHabilitacao());
+			comando.setString(12, aluno.getSerie());
+			comando.setString(13, aluno.getPeriodo());
+			comando.setString(14, aluno.getRua());
+			
 			if (aluno.getComplemento() != null) {
-				comando.setString(19, aluno.getComplemento());
+				comando.setString(15, aluno.getComplemento());
 			} else {
-				comando.setNull(19, java.sql.Types.VARCHAR);
+				comando.setNull(15, java.sql.Types.VARCHAR);
 			}
+			
 			if (aluno.getApto() != null) {
-				comando.setString(20, aluno.getApto());
+				comando.setString(16, aluno.getApto());
 			} else {
-				comando.setNull(20, java.sql.Types.VARCHAR);
+				comando.setNull(16, java.sql.Types.VARCHAR);
 			}
+			
 			if (aluno.getBloco() != null) {
-				comando.setString(21, aluno.getBloco());
+				comando.setString(17, aluno.getBloco());
 			} else {
-				comando.setNull(21, java.sql.Types.VARCHAR);
+				comando.setNull(17, java.sql.Types.VARCHAR);
 			}
-			comando.setString(22, aluno.getBairro());
-			comando.setString(23, aluno.getCidade());
-			comando.setString(24, aluno.getCEP());
-			comando.setString(25, aluno.getTelefone());
-			comando.setString(26, aluno.getEmail());
-			comando.setInt(27, aluno.getId());
+			
+			comando.setString(18, aluno.getBairro());
+			comando.setString(19, aluno.getCidade());
+			comando.setString(20, aluno.getCEP());
+			comando.setString(21, aluno.getTelefone());
+			comando.setString(22, aluno.getEmail());
+			comando.setInt(23, aluno.getId()); 
+			
 			comando.executeUpdate();
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao atualizar dados no Banco de Dados: " + e.getMessage());
 		} finally {
 			try {
-				if (comando != null) {
-					comando.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
+				if (comando != null) comando.close();
+				if (conn != null) conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -149,7 +152,6 @@ public class AlunoDAO {
 	public void excluir(int id) {
 		Connection conn = null;
 		PreparedStatement comando = null;
-		
 		String sql = "DELETE FROM aluno WHERE id = ?";
 		
 		try {
@@ -161,12 +163,8 @@ public class AlunoDAO {
             throw new RuntimeException("Erro ao excluir aluno: " + e.getMessage());
         } finally {
             try {
-                if (comando != null) {
-                    comando.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+                if (comando != null) comando.close();
+                if (conn != null) conn.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -175,7 +173,6 @@ public class AlunoDAO {
 	
 	public List<Aluno> listar() {
 		List<Aluno> lista = new ArrayList<Aluno>();
-		
 		Connection conn = null;
 		PreparedStatement comando = null;
 		//o rs serve para mostrar o resultado, o SELECT
@@ -198,11 +195,7 @@ public class AlunoDAO {
 				aluno.setAfrodescendente(rs.getBoolean("afrodescendente"));
 				aluno.setEscolaridade_publica(rs.getBoolean("escolaridade_publica"));
 				aluno.setData_nascimento(rs.getDate("data_nascimento"));
-				aluno.setLocal_nascimento(rs.getString("local_nascimento"));
 				aluno.setNacionalidade(rs.getString("nacionalidade"));
-				aluno.setPais_origem(rs.getString("pais_origem"));
-				aluno.setFiliacao_1(rs.getString("filiacao_1"));
-				aluno.setFiliacao_2(rs.getString("filiacao_2"));
 				aluno.setResponsavel_legal(rs.getString("responsavel_legal"));
 				aluno.setGrau_parentesco(rs.getString("grau_parentesco"));
 				aluno.setHabilitacao(rs.getString("habilitacao"));
@@ -223,21 +216,13 @@ public class AlunoDAO {
             throw new RuntimeException("Erro ao listar alunos: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (comando != null) {
-                    comando.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
+                if (rs != null) rs.close();
+                if (comando != null) comando.close();
+                if (conn != null) conn.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 		return lista;
-		
 	}
-
 }

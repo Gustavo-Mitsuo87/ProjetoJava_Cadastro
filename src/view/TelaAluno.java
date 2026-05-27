@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 import javax.swing.JComboBox;
 
-// import controller.AlunoConrtoller;
+import controller.AlunoController;
 
 
 public class TelaAluno extends JFrame {
@@ -84,7 +84,7 @@ public class TelaAluno extends JFrame {
     private JTable tabelaAlunos;
     private DefaultTableModel modeloTabela;
     
-    // private Controllers controller;
+    private AlunoController controller;
 
     public TelaAluno() {
     	setTitle("Cadastro de Alunos");
@@ -95,9 +95,9 @@ public class TelaAluno extends JFrame {
         
         criarComponentes();
         
-        /*controller = new Controllers(this);
+        controller = new AlunoController(this);
         configurarEventos();
-        controller.carregarTabela();*/
+        controller.carregarTabela();
         
     }
     
@@ -306,7 +306,7 @@ public class TelaAluno extends JFrame {
         
     }
     
-    /*private void configurarEventos() {
+    private void configurarEventos() {
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 controller.limpar();
@@ -336,7 +336,7 @@ public class TelaAluno extends JFrame {
                 controller.preencherFormulario();
             }
         });
-    }*/
+    }
     
     public JTextField getTxtId() {
         return txtId;
